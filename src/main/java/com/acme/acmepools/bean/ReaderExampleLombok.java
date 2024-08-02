@@ -5,6 +5,7 @@
  */
 package com.acme.acmepools.bean;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,10 +31,10 @@ public class ReaderExampleLombok {
         reader = new BufferedReader(
                 new InputStreamReader(fis));
 
-        String line = reader.readLine();
+        String line = BoundedLineReader.readLine(reader, 5_000_000);
         while (line != null) {
             System.out.println(line);
-            line = reader.readLine();
+            line = BoundedLineReader.readLine(reader, 5_000_000);
         }
     }
 }
